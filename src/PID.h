@@ -68,6 +68,8 @@ public:
   * Calculate the steering angle.
   */
   double SteeringAngle(double tau_p, double tau_i, double tau_d);
+
+  std::vector<double> PID::TotalErrorAndSteerAngle(double taup, double taui, double taud);
 };
 
 #endif /* PID_H */

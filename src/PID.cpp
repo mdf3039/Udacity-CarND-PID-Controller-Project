@@ -123,6 +123,7 @@ std::vector<double> PID::TotalErrorAndSteerAngle(double taup, double taui, doubl
             steer_angle_train = taup
         }
     }
+    return cte_vector_train;
 }
 
 double PID::TotalError(double cte, double delta_distance, std::vector<double> pid_vector) {
