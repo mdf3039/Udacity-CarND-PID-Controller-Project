@@ -1,5 +1,6 @@
 #include "PID.h"
 #include <vector>
+#include<cmath>
 
 using namespace std;
 
@@ -56,13 +57,17 @@ void PID::UpdateError(double cte, double delta_distance) {
     //based on the cte and taus, obtain the steering angle
     double steer_angle = SteeringAngle(Kp,Ki,Kd);
     //based on the steering angle, find the expected value of the next cte
-    double exp_cte = cte + delta_t*speed*sin(steer_angle);
+    double exp_cte = cte + delta_distance*sin(steer_angle);
     //put the error values and PID coefficient values into a
     //vector for easier use
     std::vector<double> error_vector;
-    error_vector << p_error,i_error,d_error;
+    error_vector.push_back(p_error);
+    error_vector.push_back(i_error);
+    error_vector.push_back(d_error);
     std::vector<double> pid_vector;
-    pid_vector << Kp,Ki,Kd;
+    pid_vector.push_back(Kp);
+    pid_vector.push_back(Ki);
+    pid_vector.push_back(Kd);
     for (int i = 0; i < pid_vector.size(); ++i) {
         //do comparisons of the exp_cte with the altered_cte.
         // if the altered is better, use the altered steering angle.
@@ -75,7 +80,7 @@ void PID::UpdateError(double cte, double delta_distance) {
             exp_cte = alt_exp_cte;
             //Keep changing the tau parameter by the error amount until it
             //can't be changed anymore.
-            bool while_boolean = true
+            bool while_boolean = true;
             while (while_boolean){
                 //after adding onto the pid, if the altered error is smaller
                 //than the exp_cte, keep going

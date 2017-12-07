@@ -1,6 +1,7 @@
 #ifndef PID_H
 #define PID_H
 #include <vector>
+#include<cmath>
 
 class PID {
 public:
@@ -62,11 +63,11 @@ public:
   /*
   * Calculate the total PID error.
   */
-  double TotalError();
+  double TotalError(double cte, double delta_distance, std::vector<double> pid_vector);
   /*
   * Calculate the steering angle.
   */
-  double SteeringAngle();
+  double SteeringAngle(double tau_p, double tau_i, double tau_d);
 };
 
 #endif /* PID_H */
