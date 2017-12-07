@@ -63,7 +63,7 @@ int main()
           pid.UpdateError(cte,speed*delta_t);
           steer_value = pid.steer_angle;
           */
-          steer_value = -1.0*sqrt(cte);
+          steer_value = -1.0*cte;
           if (steer_value<-1.0){
             steer_value = -1.0;
           }
