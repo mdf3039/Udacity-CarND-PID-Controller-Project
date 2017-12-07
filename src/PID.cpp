@@ -118,10 +118,10 @@ std::vector<double> PID::TotalErrorAndSteerAngle(double taup, double taui, doubl
     double steer_angle_train;
     for (int i = 1; i < full_cte_vector.size(); ++i){
         if (i!=1){
-            steer_angle_train = taup*1
+            steer_angle_train = taup*1;
         }
         else{
-            steer_angle_train = taup
+            steer_angle_train = taup;
         }
     }
     return cte_vector_train;
@@ -138,7 +138,7 @@ double PID::TotalError(double cte, double delta_distance, std::vector<double> pi
 
 double PID::SteeringAngle(double tau_p, double tau_i, double tau_d){
     //Find the steering angle
-    double s_angle = tau_p*cte + tau_d*(cte-previous_cte) + tau_i*sum_previous_ctes;
+    double s_angle = tau_p//*cte + tau_d*(cte-previous_cte) + tau_i*sum_previous_ctes;
     //make sure the angle is between [-1,1]
     if (s_angle<-1){
         s_angle = -1.0;
