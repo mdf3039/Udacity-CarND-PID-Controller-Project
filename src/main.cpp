@@ -3,6 +3,7 @@
 #include "json.hpp"
 #include "PID.h"
 #include <math.h>
+#include <vector>
 
 // for convenience
 using json = nlohmann::json;
