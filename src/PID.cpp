@@ -98,6 +98,7 @@ void PID::UpdateError(double cte, double delta_distance) {
             }
 
         }
+    }
 
 
 
