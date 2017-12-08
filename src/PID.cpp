@@ -19,8 +19,8 @@ void PID::Init(double Kp0, double Ki0, double Kd0) {
     p_error = 1.0;
     i_error = 1.0;
     d_error = 1.0;
-    previous_cte = 0;
-    sum_previous_ctes = 0;
+    //previous_cte = 0;
+    //sum_previous_ctes = 0;
     first_obs = true;
     steer_angle = 0;
 

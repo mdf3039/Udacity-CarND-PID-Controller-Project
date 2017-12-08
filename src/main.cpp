@@ -36,8 +36,7 @@ int main()
   PID pid;
   // TODO: Initialize the pid variable.
   pid.Init(0,0,0);
-  double prev_cte = -999.25;
-  std::vector<double> previous_ctes;
+  pid.prev_cte = -999.25;
   n_elements = 20;
 
   h.onMessage([&pid](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, uWS::OpCode opCode) {
@@ -58,6 +57,7 @@ int main()
           double steer_value;
           double set_throttle = 0.3;
           double delta_t = .1;
+          double n_elements = 20;
           /*
           * TODO: Calcuate steering value here, remember the steering value is
           * [-1, 1].
@@ -67,14 +67,14 @@ int main()
           pid.UpdateError(cte,speed*delta_t);
           steer_value = pid.steer_angle;
           */
-          if (prev_cte==-999.25){
-            prev_cte = cte;
+          if (pid.prev_cte==-999.25){
+            pid.prev_cte = cte;
           }
-          previous_ctes.push_back(cte);
-          if (previous_ctes.size()>n_elements){
-            previous_ctes.pop();
+          pid.previous_ctes.push_back(cte);
+          if (pid.previous_ctes.size()>n_elements){
+            pid.previous_ctes.erase(pid.previous_ctes.begin());
           }
-          steer_value = -1.0*(cte/(speed+0.1)+3.0*(cte-prev_cte)+.004*std::accumulate(previous_ctes.begin(), previous_ctes.end(), 0));
+          steer_value = -1.0*(cte/(speed+0.1)+3.0*(cte-pid.prev_cte)+.004*std::accumulate(pid.previous_ctes.begin(), pid.previous_ctes.end(), 0));
           if (steer_value<-1.0){
             steer_value = -1.0;
           }

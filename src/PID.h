@@ -22,8 +22,8 @@ public:
   /*
   * Store previous CTE and the sum of all previous CTEs
   */
-  double previous_cte;
-  double sum_previous_ctes;
+  double prev_cte;
+  std::vector<double> previous_ctes;
 
   /*
   * Other variables
