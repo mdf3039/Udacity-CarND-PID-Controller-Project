@@ -36,6 +36,9 @@ int main()
   PID pid;
   // TODO: Initialize the pid variable.
   pid.Init(0,0,0);
+  double prev_cte = -999.25;
+  std::vector<double> previous_ctes;
+  n_elements = 20;
 
   h.onMessage([&pid](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, uWS::OpCode opCode) {
     // "42" at the start of the message means there's a websocket message event.
@@ -64,7 +67,14 @@ int main()
           pid.UpdateError(cte,speed*delta_t);
           steer_value = pid.steer_angle;
           */
-          steer_value = -1.0*cte/(speed+0.1);
+          if (prev_cte==-999.25){
+            prev_cte = cte;
+          }
+          previous_ctes.push_back(cte);
+          if (previous_ctes.size()>n_elements){
+            previous_ctes.pop();
+          }
+          steer_value = -1.0*(cte/(speed+0.1)+3.0*(cte-prev_cte)+.004*std::accumulate(previous_ctes.begin(), previous_ctes.end(), 0));
           if (steer_value<-1.0){
             steer_value = -1.0;
           }
@@ -74,6 +84,7 @@ int main()
           if (speed>10){
             set_throttle = 0;
           }
+          prev_cte = cte;
 
           // DEBUG
           std::cout << "CTE: " << cte << " Steering Value: " << steer_value << std::endl;
