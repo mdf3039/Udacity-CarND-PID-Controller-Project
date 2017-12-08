@@ -74,7 +74,7 @@ int main()
           if (pid.previous_ctes.size()>n_elements){
             pid.previous_ctes.erase(pid.previous_ctes.begin());
           }
-          steer_value = -1.0*(cte/(speed+0.1)+3.0*(cte-pid.prev_cte)+.004*std::accumulate(pid.previous_ctes.begin(), pid.previous_ctes.end(), 0));
+          steer_value = -1.0*(cte/(speed+0.1)+3.0*(cte-pid.prev_cte)+.04*std::accumulate(pid.previous_ctes.begin(), pid.previous_ctes.end(), 0));
           if (steer_value<-1.0){
             steer_value = -1.0;
           }
