@@ -15,15 +15,6 @@ The goals / steps of this project are the following:
 * Describe how the final hyperparameters were chosen.
 * The vehicle must successfully drive a lap around the track.
 
-[//]: # (Image References)
-
-[image1]: ./output_images1/output_image1.png "Undistorted"
-[image2]: ./output_images1/output_image2.png "Road Transformed"
-[image3]: ./output_images1/output_image3.png "Binary Example"
-[image4]: ./output_images1/output_image4.png "Warp Example"
-[image5]: ./output_images1/output_image5.png "Fit Visual"
-[image6]: ./output_images1/output_image6.png "Output"
-[video1]: ./video_output.mp4 "Video"
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/824/view) Points
 
